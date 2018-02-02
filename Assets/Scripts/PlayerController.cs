@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour {
 	public Transform hmd;
 	public Transform leftController;
 	public Transform rightController;
-	// Use this for initialization
 
 	public Rigidbody leftHeldObject;
 	public Rigidbody rightHeldObject;
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour {
 		int leftIndex = (int)leftController.GetComponent<SteamVR_TrackedObject> ().index;
 		int rightIndex = (int)rightController.GetComponent<SteamVR_TrackedObject> ().index;
 
-		float rightTrigger = SteamVR_Controller.Input (rightIndex).GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).magnitude;
 
 		//left hand control
 		if (leftIndex >= 0) {
@@ -57,19 +55,20 @@ public class PlayerController : MonoBehaviour {
 			}
 			if (leftHeldObject != null) {
 				leftHeldObject.velocity = (leftHand.transform.position - leftHeldObject.position) / Time.deltaTime;
-				/*
+
 				float angle;
 				Vector3 axis;
-				Quaternion q = leftHand.transform.rotation * Quaternion.Inverse (leftHeldObject.rotation);
+				Quaternion q = leftHand.transform.rotation * Quaternion.Inverse(leftHeldObject.rotation);
 				q.ToAngleAxis (out angle, out axis);
 				leftHeldObject.angularVelocity = axis * angle * Mathf.Deg2Rad / Time.deltaTime;
-				*/
+
 			}
 
 		}
 
 		//right hand control
 		if (rightIndex >= 0) {
+			float rightTrigger = SteamVR_Controller.Input (rightIndex).GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).magnitude;
 			//right hand hold
 			if (rightHand.intersected != null && rightTrigger > .2f) {
 				rightHeldObject = rightHand.intersected;
@@ -86,18 +85,13 @@ public class PlayerController : MonoBehaviour {
 			}
 			if (rightHeldObject != null) {
 				rightHeldObject.velocity = (rightHand.transform.position - rightHeldObject.position) / Time.deltaTime;
-				/*
 				float angle;
 				Vector3 axis;
-				Quaternion q = rightHand.transform.rotation * Quaternion.Inverse (rightHeldObject.rotation);
+				Quaternion q = rightHand.transform.rotation * Quaternion.Inverse(rightHeldObject.rotation);
 				q.ToAngleAxis (out angle, out axis);
 				rightHeldObject.angularVelocity = axis * angle * Mathf.Deg2Rad / Time.deltaTime;
-				*/
-			
 			}
 		}
-
-
 	}
 
 }
