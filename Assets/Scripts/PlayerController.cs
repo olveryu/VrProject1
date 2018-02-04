@@ -84,9 +84,9 @@ public class PlayerController : MonoBehaviour {
 
 			}
 			if (rightHeldObject != null) {
-				rightHeldObject.velocity = (rightHand.transform.position - rightHeldObject.position) / Time.deltaTime;
+				rightHeldObject.velocity = (rightHand.transform.position - rightHeldObject.position) *Time.deltaTime;
 				//rightHeldObject.velocity {rightHand.transform.rotation; rightHeldObject.rotation};
-				//rightHeldObject.transform.Rotate(180, 0, 0);
+				//			rightHeldObject.transform.Rotate(180, 0, 0);
 				float angle;
 				Vector3 axis;
 				Quaternion q = rightHand.transform.rotation * (Quaternion.Inverse(rightHeldObject.rotation));
