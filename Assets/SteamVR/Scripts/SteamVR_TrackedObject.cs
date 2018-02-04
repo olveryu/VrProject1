@@ -9,6 +9,8 @@ using Valve.VR;
 
 public class SteamVR_TrackedObject : MonoBehaviour
 {
+	public bool useFixedUpdate;
+	SteamVR_Utils.RigidTransform lastPose;
 	public enum EIndex
 	{
 		None = -1,

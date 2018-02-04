@@ -85,11 +85,13 @@ public class PlayerController : MonoBehaviour {
 			}
 			if (rightHeldObject != null) {
 				rightHeldObject.velocity = (rightHand.transform.position - rightHeldObject.position) / Time.deltaTime;
+				//rightHeldObject.velocity {rightHand.transform.rotation; rightHeldObject.rotation};
+				//rightHeldObject.transform.Rotate(180, 0, 0);
 				float angle;
 				Vector3 axis;
-				Quaternion q = rightHand.transform.rotation * Quaternion.Inverse(rightHeldObject.rotation);
+				Quaternion q = rightHand.transform.rotation * (Quaternion.Inverse(rightHeldObject.rotation));
 				q.ToAngleAxis (out angle, out axis);
-				rightHeldObject.angularVelocity = axis * angle * Mathf.Deg2Rad / Time.deltaTime;
+				rightHeldObject.angularVelocity =  axis * angle * Mathf.Deg2Rad / Time.deltaTime;
 			}
 		}
 	}
