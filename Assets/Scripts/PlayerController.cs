@@ -48,9 +48,9 @@ public class PlayerController : MonoBehaviour {
 			}
 			//left hand release
 			if (leftHeldObject != null && leftTrigger <= .2f) {
-				leftHeldObject.velocity = SteamVR_Controller.Input (leftIndex).velocity;
-				leftHeldObject.angularVelocity = SteamVR_Controller.Input (leftIndex).angularVelocity;
-				leftHeldObject.maxAngularVelocity = saveMaxLeft;
+				leftHeldObject.velocity = SteamVR_Controller.Input (leftIndex).velocity * 4;
+				//leftHeldObject.angularVelocity = SteamVR_Controller.Input (leftIndex).angularVelocity;
+				//leftHeldObject.maxAngularVelocity = saveMaxLeft;
 				leftHeldObject = null;
 			}
 			if (leftHeldObject != null) {
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour {
 				Vector3 axis;
 				Quaternion q = leftHand.transform.rotation * Quaternion.Inverse(leftHeldObject.rotation);
 				q.ToAngleAxis (out angle, out axis);
-				leftHeldObject.angularVelocity = axis * angle * Mathf.Deg2Rad / Time.deltaTime;
+				//leftHeldObject.angularVelocity = axis * angle * Mathf.Deg2Rad / Time.deltaTime;
 
 			}
 
@@ -77,21 +77,21 @@ public class PlayerController : MonoBehaviour {
 			}
 			//right hand release
 			if (rightHeldObject != null && rightTrigger <= .2f) {
-				rightHeldObject.velocity = SteamVR_Controller.Input (rightIndex).velocity;
+				rightHeldObject.velocity = SteamVR_Controller.Input (rightIndex).velocity * 4;
 				//rightHeldObject.angularVelocity = SteamVR_Controller.Input (rightIndex).angularVelocity;
 				//rightHeldObject.maxAngularVelocity = saveMaxRight;
 				rightHeldObject = null;
 
 			}
 			if (rightHeldObject != null) {
-				rightHeldObject.velocity = (rightHand.transform.position - rightHeldObject.position) *Time.deltaTime;
+				rightHeldObject.velocity = (rightHand.transform.position - rightHeldObject.position) / Time.deltaTime;
 				//rightHeldObject.velocity {rightHand.transform.rotation; rightHeldObject.rotation};
-				//			rightHeldObject.transform.Rotate(180, 0, 0);
+				//rightHeldObject.transform.Rotate(180, 0, 0);
 				float angle;
 				Vector3 axis;
 				Quaternion q = rightHand.transform.rotation * (Quaternion.Inverse(rightHeldObject.rotation));
 				q.ToAngleAxis (out angle, out axis);
-				rightHeldObject.angularVelocity =  axis * angle * Mathf.Deg2Rad / Time.deltaTime;
+				//rightHeldObject.angularVelocity =  axis * angle * Mathf.Deg2Rad / Time.deltaTime;
 			}
 		}
 	}
