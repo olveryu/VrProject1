@@ -9,9 +9,11 @@ public class Darts : MonoBehaviour {
 	public Transform target;
 	public Vector3 refVector;
 	public float dis_from_Ctr;
+	public DartBoard Db;
 
 	void OnCollisionEnter(Collision col){
 		if (col.gameObject.tag == "dartBoard") {
+			Db.soundUpdate();
 			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 			gameObject.GetComponent<Rigidbody> ().useGravity = false;
 			//ggc.scoreUpdate (5);
@@ -39,8 +41,12 @@ public class Darts : MonoBehaviour {
 
 			// If Statments for the top part of the bored. 
 			//the upper part of the board is actually in the negitive y direction, i dont know why that is but whatever. 
-			if (dis_from_Ctr > 3.7) {
+			if (dis_from_Ctr > 3.9) {
 				ggc.scoreUpdate (0);
+			} else if (dis_from_Ctr < .25) {
+				ggc.scoreUpdate (50);
+			} else if (dis_from_Ctr >= .25 && dis_from_Ctr < .30) {
+				ggc.scoreUpdate (25);
 			}
 			else if (angle >= 0 && angle < 10 && position.y < 0) {
 				if (dis_from_Ctr <= 2.5 && dis_from_Ctr >= 2.3) {
@@ -222,12 +228,20 @@ public class Darts : MonoBehaviour {
 					ggc.scoreUpdate (11);
 				}
 			}
+
 			ggc.roundCheck ();
 		}
 		if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Walls") {
 			gameObject.GetComponent<Rigidbody> ().velocity.Set (0, 0, 0);
 			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 			gameObject.GetComponent<Rigidbody> ().useGravity = false;
+			ggc.roundCheck ();
+		}
+		if (col.gameObject.tag == "dart") {
+			gameObject.GetComponent<Rigidbody> ().velocity.Set (0, 0, 0);
+			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+			gameObject.GetComponent<Rigidbody> ().useGravity = false;
+			ggc.scoreUpdate (0);
 			ggc.roundCheck ();
 		}
 	}

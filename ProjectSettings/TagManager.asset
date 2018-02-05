@@ -11,6 +11,8 @@ TagManager:
   - tooFar
   - youWinSign
   - playAgain!
+  - FPS
+  - head
   layers:
   - Default
   - TransparentFX

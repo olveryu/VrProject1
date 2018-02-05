@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class GameController : MonoBehaviour {
 	public Text scoreText;
 	public int score;
@@ -10,6 +12,7 @@ public class GameController : MonoBehaviour {
 	public Text youHitText;
 	public int RoundCount;
 	public Text roundText;
+	public Text FPS;
 	private int DartCounter;
 	public GameObject youWinSign;
 	public GameObject Dart1;
@@ -22,21 +25,44 @@ public class GameController : MonoBehaviour {
 	public GameObject firework1;
 	public GameObject firework2;
 	public int lastRoundStartScore;
+	public float FPSN;
+	public Vector3 LightDirection;
+	public GameObject lightSc;
 	// Use this for initialization
 	void Start () {
+		//restartText.text = "";
 		score = 101;
 		deg = 0;
-		Dart_1_Spawn.Set (8, -5, 0); // this is telling us the x y z corrdinates of where dart 1 is to be reset at. 
-		Dart_2_Spawn.Set (8, -5, 1);
-		Dart_3_Spawn.Set (8, -5, -1);
+		Dart_1_Spawn.Set (8, -2, 0); // this is telling us the x y z corrdinates of where dart 1 is to be reset at. 
+		Dart_2_Spawn.Set (8, -2, 1);
+		Dart_3_Spawn.Set (8, -2, -1);
 		DartCounter = 0; // this counts how many times a dart hit the board.
 		RoundCount = 0; // this counts up the rounds.
 		scoreText.text = "score remaining: " + score;
 		//degreeText.text = "Degree is: " + deg;
 		roundText.text = "Round " + RoundCount;
 		youWinSign.SetActive (false);
+		lightSc.SetActive (true);
+		LightDirection.Set (18, 22, 1);
+		lightSc.transform.position = LightDirection;
 	}
-	
+
+	void Update(){
+		FPSN = 1/Time.deltaTime;
+		FPS.text = "FPS: " + FPSN;
+		if(Input.GetButtonDown("YButton")){
+			RestartF ();
+		}
+	}
+
+
+	public void RestartF(){
+			SceneManager.LoadScene (0);
+			lightSc.SetActive (true);
+		LightDirection.Set (18, 22, 1);
+		lightSc.transform.position = LightDirection;
+	}
+
 	// Update is called once per frame
 	public void scoreUpdate (int sub) {
 		Debug.Log ("score update");
@@ -59,7 +85,6 @@ public class GameController : MonoBehaviour {
 			firework1.SetActive (true);
 			firework2.SetActive (true);
 			youWinSign.SetActive (true);
-//			youWinText.text = "YOU WIN! Score: " + RoundCount;
 		} else if (score < 0) {
 			//StartCoroutine (Advice(tooFar, 5)); //DO NOT DELETE. Starts a CO-Routine that will show advice to the user then dissapear.
 			DartCounter = 2;
@@ -78,14 +103,17 @@ public class GameController : MonoBehaviour {
 		if (DartCounter >= 3) {
 			//reset the position of dart 1 and make it non-Kinematic and use gravity again
 			Dart1.transform.position = Dart_1_Spawn; 
+			//Dart1.gameObject.GetComponent<Rigidbody> ().rotation.Set (0, 180, 270, 1);
 			Dart1.gameObject.GetComponent<Rigidbody> ().isKinematic = false;
 			Dart1.gameObject.GetComponent<Rigidbody> ().useGravity = true;
 			//reset the position of dart 2 and make it non-Kinematic and use gravity again
 			Dart2.transform.position = Dart_2_Spawn; 
+			//Dart2.gameObject.GetComponent<Rigidbody> ().rotation.Set (0, 180, 270, 1);
 			Dart2.gameObject.GetComponent<Rigidbody> ().isKinematic = false;
 			Dart2.gameObject.GetComponent<Rigidbody> ().useGravity = true;
 			//reset the position of dart 3 and make it non-Kinematic and use gravity again
 			Dart3.transform.position = Dart_3_Spawn; 
+			//Dart3.gameObject.GetComponent<Rigidbody> ().rotation.Set (0, 180, 270, 1);
 			Dart3.gameObject.GetComponent<Rigidbody> ().isKinematic = false;
 			Dart3.gameObject.GetComponent<Rigidbody> ().useGravity = true;
 			//reset the dart counter

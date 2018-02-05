@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DartBoard : MonoBehaviour {
-	public Darts dart;
-
+	//public Darts dart;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,5 +12,9 @@ public class DartBoard : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void soundUpdate(){
+		GetComponent<AudioSource> ().Play();
 	}
 }

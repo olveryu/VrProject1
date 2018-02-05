@@ -14,16 +14,10 @@ public class PlayerController : MonoBehaviour {
 	public Rigidbody leftHeldObject;
 	public Rigidbody rightHeldObject;
 
+
 	float saveMaxLeft;
-	float saveMaxRight;
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	//float saveMaxRight;
+
 
 	void LateUpdate(){
 		head.rotation = hmd.rotation;
@@ -40,6 +34,7 @@ public class PlayerController : MonoBehaviour {
 		//left hand control
 		if (leftIndex >= 0) {
 			float leftTrigger = SteamVR_Controller.Input (leftIndex).GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).magnitude;
+
 			//left hand hold
 			if (leftHand.intersected != null && leftTrigger > .2f) {
 				leftHeldObject = leftHand.intersected;
@@ -55,11 +50,10 @@ public class PlayerController : MonoBehaviour {
 			}
 			if (leftHeldObject != null) {
 				leftHeldObject.velocity = (leftHand.transform.position - leftHeldObject.position) / Time.deltaTime;
-
-				float angle;
-				Vector3 axis;
-				Quaternion q = leftHand.transform.rotation * Quaternion.Inverse(leftHeldObject.rotation);
-				q.ToAngleAxis (out angle, out axis);
+				//float angle;
+				//Vector3 axis;
+				//Quaternion q = leftHand.transform.rotation * Quaternion.Inverse(leftHeldObject.rotation);
+				//q.ToAngleAxis (out angle, out axis);
 				//leftHeldObject.angularVelocity = axis * angle * Mathf.Deg2Rad / Time.deltaTime;
 
 			}
@@ -78,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 			//right hand release
 			if (rightHeldObject != null && rightTrigger <= .2f) {
 				rightHeldObject.velocity = SteamVR_Controller.Input (rightIndex).velocity * 11;
-				//rightHeldObject.angularVelocity = SteamVR_Controller.Input (rightIndex).angularVelocity;
+				rightHeldObject.angularVelocity = SteamVR_Controller.Input (rightIndex).angularVelocity;
 				//rightHeldObject.maxAngularVelocity = saveMaxRight;
 				rightHeldObject = null;
 
@@ -87,10 +81,10 @@ public class PlayerController : MonoBehaviour {
 				rightHeldObject.velocity = (rightHand.transform.position - rightHeldObject.position) / Time.deltaTime;
 				//rightHeldObject.velocity {rightHand.transform.rotation; rightHeldObject.rotation};
 				//rightHeldObject.transform.Rotate(180, 0, 0);
-				float angle;
-				Vector3 axis;
-				Quaternion q = rightHand.transform.rotation * (Quaternion.Inverse(rightHeldObject.rotation));
-				q.ToAngleAxis (out angle, out axis);
+				//float angle;
+				//Vector3 axis;
+				//Quaternion q = rightHand.transform.rotation * (Quaternion.Inverse(rightHeldObject.rotation));
+				//q.ToAngleAxis (out angle, out axis);
 				//rightHeldObject.angularVelocity =  axis * angle * Mathf.Deg2Rad / Time.deltaTime;
 			}
 		}
