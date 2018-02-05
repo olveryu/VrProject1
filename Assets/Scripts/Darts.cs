@@ -39,7 +39,10 @@ public class Darts : MonoBehaviour {
 
 			// If Statments for the top part of the bored. 
 			//the upper part of the board is actually in the negitive y direction, i dont know why that is but whatever. 
-			if (angle >= 0 && angle < 10 && position.y < 0) {
+			if (dis_from_Ctr > 3.7) {
+				ggc.scoreUpdate (0);
+			}
+			else if (angle >= 0 && angle < 10 && position.y < 0) {
 				if (dis_from_Ctr <= 2.5 && dis_from_Ctr >= 2.3) {
 					ggc.scoreUpdate (6 * 3);
 				} else if (dis_from_Ctr <= 3.9 && dis_from_Ctr >= 3.7) {
@@ -222,6 +225,7 @@ public class Darts : MonoBehaviour {
 			ggc.roundCheck ();
 		}
 		if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Walls") {
+			gameObject.GetComponent<Rigidbody> ().velocity.Set (0, 0, 0);
 			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 			gameObject.GetComponent<Rigidbody> ().useGravity = false;
 			ggc.roundCheck ();

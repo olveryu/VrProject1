@@ -7,6 +7,10 @@ TagManager:
   - dartBoard
   - Ground
   - Walls
+  - firework
+  - tooFar
+  - youWinSign
+  - playAgain!
   layers:
   - Default
   - TransparentFX
