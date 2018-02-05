@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			//left hand release
 			if (leftHeldObject != null && leftTrigger <= .2f) {
-				leftHeldObject.velocity = SteamVR_Controller.Input (leftIndex).velocity * 4;
+				leftHeldObject.velocity = SteamVR_Controller.Input (leftIndex).velocity * 9;
 				//leftHeldObject.angularVelocity = SteamVR_Controller.Input (leftIndex).angularVelocity;
 				//leftHeldObject.maxAngularVelocity = saveMaxLeft;
 				leftHeldObject = null;
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			//right hand release
 			if (rightHeldObject != null && rightTrigger <= .2f) {
-				rightHeldObject.velocity = SteamVR_Controller.Input (rightIndex).velocity * 4;
+				rightHeldObject.velocity = SteamVR_Controller.Input (rightIndex).velocity * 9;
 				//rightHeldObject.angularVelocity = SteamVR_Controller.Input (rightIndex).angularVelocity;
 				//rightHeldObject.maxAngularVelocity = saveMaxRight;
 				rightHeldObject = null;

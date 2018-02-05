@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - dartBoard
+  - Ground
+  - Walls
   layers:
   - Default
   - TransparentFX
